@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { SelectedContext, useSelected } from '../../components/context/SelectedContextProvider'
 
 export default function Characters() {
+
+    const { selectedHero, setSelectedHero } = useSelected(SelectedContext);
 
     // const [aux] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
     const [aux] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
@@ -20,11 +23,12 @@ export default function Characters() {
     function handleShow() {
         setShow(!show)
     }
-    function handleAdd(heroe) {
-        alert(`Adding ${heroe} to Selected`)
+    function handleAdd(hero) {
+        alert(`Adding ${hero} to Selected`)
+        selectedHero.push(hero)
     }
-    function handleRemove(heroe) {
-        alert(`Removing ${heroe} from Selected`)
+    function handleRemove(hero) {
+        alert(`Removing ${hero} from Selected`)
     }
 
     return (

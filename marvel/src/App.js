@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Header from './pages/header/Header'
 import AppRoutes from './AppRoutes'
 import Footer from './pages/footer/Footer'
+import SelectedContextProvider from './components/context/SelectedContextProvider'
 
 export default function App() {
 
@@ -11,9 +12,11 @@ export default function App() {
 
   return (
     <>
-      <Header />
-      <AppRoutes />
-      <Footer />
+      <SelectedContextProvider>
+        <Header />
+        <AppRoutes />
+        <Footer />
+      </SelectedContextProvider>
     </>
 
   )
