@@ -6,7 +6,7 @@ try:
 except ImportError as ie:
     print("Error importing required packages: {ie}")
 
-limit = "55"
+limit = "100"
 ts = "1649095132"
 apikey = "e423b333a7aba87d5f832698af6bc1eb"
 hashkey = "9f97209a76d8959d9497419381a93284"

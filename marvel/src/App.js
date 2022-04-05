@@ -1,33 +1,34 @@
 import React, { useState, useEffect } from "react";
 
-function App() {
+export default function App() {
 
+  // const [aux] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+  const [aux] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
   const [heroes, setHeroes] = useState([])
 
   useEffect(() => {
     fetch("/rest").then(resp =>
       resp.json().then(data => {
-        console.log("DATA" + JSON.stringify(data[0]))
+        console.log("DATA " + JSON.stringify(data))
         setHeroes(data);
-        console.log("XXXXXXXXXXXXXXXXXXXXXX" + JSON.stringify(heroes))
       }))
   }, [])
 
   return (
     <div>
-      <h1>{heroes[0].name}</h1>
+      <div>
+        <h1>Index</h1>
+        {aux.map((t, i) => {
+          return (
+            <div key={i}>
+              <h3>{i + 1} - {heroes[i]["name"]}</h3>
+              <p>{heroes[i]["description"]}</p>
+              <img src={heroes[i]["thumbnail"]} width={150} alt={JSON.stringify(heroes[i]["name"])} />
+            </div>
+          )
+        })}
+      </div>
     </div>
+
   )
 }
-
-export default App;
-
-{/* <div key={heroe.data.offset}> */ }
-{/* <p>{heroes["data"]["results"][0]["name"]}</p> */ }
-{/* <p>{JSON.stringify(heroes["data"]["offset"])}</p> */ }
-
-{/* <div>
-      <h1>{heroes[0].name}</h1>
-      <p>{heroes[0].description}</p>
-      <img src={heroes[0].thumbnail} alt={heroes[0].name} />
-      </div> */}
