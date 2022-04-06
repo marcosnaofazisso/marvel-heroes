@@ -5,25 +5,29 @@ export default function Characters() {
 
     const { selectedHero, setSelectedHero } = useSelected(SelectedContext);
 
-    // const [aux] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
-    const [aux] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
     const [heroes, setHeroes] = useState([])
     const [show, setShow] = useState(false)
 
     useEffect(() => {
-        fetch("/rest").then(resp =>
-            resp.json().then(data => {
-                console.log("DATA " + JSON.stringify(data))
-                setHeroes(data);
-            }).catch(error => {
-                console.log(error)
-            }))
+        async function fetchData() {
+            try {
+                const response = await fetch("/rest");
+                const results = await response.json();
+                setHeroes(results);
+                console.log(results);
+            }
+            catch(e) {
+                console.error(e);
+            }
+        }
+        fetchData();
     }, [])
 
     function handleShow() {
         setShow(!show)
     }
     function handleAdd(hero) {
+        console.log(JSON.stringify(hero))
         alert(`Adding ${hero} to Selected`)
         selectedHero.push(hero)
     }
@@ -37,14 +41,14 @@ export default function Characters() {
             {show && <div>
                 <div>
                     <h1>Index</h1>
-                    {aux.map((t, i) => {
+                    {Object.values(heroes).map((hero, index) => {
                         return (
-                            <div key={i}>
-                                <h3>{i + 1} - {heroes[i]["name"]}</h3>
-                                <p>{heroes[i]["description"]}</p>
-                                <img src={heroes[i]["thumbnail"]} width={150} alt={JSON.stringify(heroes[i]["name"])} />
-                                <button onClick={() => handleAdd(heroes[i]["name"])}>Add</button>
-                                <button onClick={() => handleRemove(heroes[i]["name"])}>Remove</button>
+                            <div key={index}>
+                                <h3>{index + 1} - {hero["name"]}</h3>
+                                <p>{hero["description"]}</p>
+                                <img src={hero["thumbnail"]} width={150} alt={hero["name"]} />
+                                <button onClick={() => handleAdd(hero["name"])}>Add</button>
+                                <button onClick={() => handleRemove(hero["name"])}>Remove</button>
                             </div>
                         )
                     })}

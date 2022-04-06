@@ -40,15 +40,17 @@ const MenuOne = styled.nav`
 `;
 
 export default function Menu() {
-    return (
-        <div>
-            <MenuOne>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/characters">Characters</Link></li>
-                    <li><Link to="/selected" >Selected Characters</Link></li>
-                </ul>
-            </MenuOne>
-        </div>
-    )
+
+
+  return (
+    <div>
+      <MenuOne>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/characters">Characters</Link></li>
+          <li><Link to="/selected" >Selected Characters</Link></li>
+        </ul>
+      </MenuOne>
+    </div>
+  )
 }
