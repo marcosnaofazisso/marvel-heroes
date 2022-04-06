@@ -7,18 +7,29 @@ export default function Selected() {
 
     return (
         <>
-            <h1>Selected</h1>
-            <h2>{selectedHero[0]["name"]}</h2>
-            <h2>{selectedHero.length}</h2>
-            {/* {(selectedHero.length === 0 || selectedHero == null) &&
+            <h1>Total Selected: {selectedHero.length}</h1>
+            {(selectedHero.length === 0 || selectedHero == null) &&
                 <div>
                     <h1>You haven`t added any heroes :( </h1>
                 </div>}
-            {selectedHero.length >= 2 && selectedHero.map((hero, index) => {
-                return (
-                    <h2>{JSON.stringify(hero[index])}</h2>
-                )
-            })} */}
+            {(selectedHero.length == 1 && selectedHero.length < 2) &&
+                (<div>
+                    <h3>{selectedHero.length} - {selectedHero[0]["name"]}</h3>
+                    <p>{selectedHero[0]["description"]}</p>
+                    <img src={selectedHero[0]["thumbnail"]} width={150} alt={selectedHero[0]["name"]} />
+                </div>)}
+            {selectedHero.length >= 2 &&
+                <div>
+                    {Object.values(selectedHero).map((hero, index) => {
+                        return (
+                            <div key={index}>
+                                <h3>{index + 1} - {hero["name"]}</h3>
+                                <p>{hero["description"]}</p>
+                                <img src={hero["thumbnail"]} width={150} alt={hero["name"]} />
+                            </div>
+                        )
+                    })}
+                </div>}
         </>
     )
 }
