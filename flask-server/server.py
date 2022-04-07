@@ -4,19 +4,14 @@ try:
     from flask import request
     import json
 except ImportError as ie:
-    print("Error importing required packages: {ie}")
+    print("Error importing required packages:" + str(ie))
 
-limit = "100"
-ts = "1649095132"
-apikey = "e423b333a7aba87d5f832698af6bc1eb"
-hashkey = "9f97209a76d8959d9497419381a93284"
 base = "https://gateway.marvel.com:443"
 req = "/v1/public/characters?"
-
-offset = "0"
-URL = base + req + "limit=" + limit + "&ts=" + ts + "&apikey=" + \
-    apikey + "&hash=" + hashkey + "&offset=" + offset
-
+apikey = "e423b333a7aba87d5f832698af6bc1eb"
+hashkey = "9f97209a76d8959d9497419381a93284"
+limit = "100"
+ts = "1649095132"
 
 app = Flask(__name__)
 
@@ -125,14 +120,15 @@ def getHeroes(index):
     pack = {}
     try:
         for i in range(0, len(resp["data"]["results"])):
+            id = resp["data"]["results"][i]["id"]
             name = resp["data"]["results"][i]["name"]
             description = resp["data"]["results"][i]["description"]
             thumbnail = resp["data"]["results"][i]["thumbnail"]["path"] + ".jpg"
-            pack[i] = {"name": name, "description": description,
+            pack[i] = {"id": id, "name": name, "description": description,
                        "thumbnail": thumbnail}
         return pack
     except:
-        return("ERROR: Thanos won this time :( ")
+        return("ERROR: Thanos won this time :( \r\n try again")
 
 
 if __name__ == "__main__":

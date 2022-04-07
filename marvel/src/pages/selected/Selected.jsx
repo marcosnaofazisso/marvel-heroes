@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelected, SelectedContext } from '../../components/context/SelectedContextProvider'
+import { CenteredHeroes } from '../../assets/style/StyledCharacters';
 
 export default function Selected() {
 
@@ -7,29 +8,25 @@ export default function Selected() {
 
     return (
         <>
-            <h1>Total Selected: {selectedHero.length}</h1>
-            {(selectedHero.length === 0 || selectedHero == null) &&
-                <div>
-                    <h1>You haven`t selected any heroes yet 😕</h1>
-                </div>}
-            {(selectedHero.length == 1 && selectedHero.length < 2) &&
-                (<div>
-                    <h3>{selectedHero.length} - {selectedHero[0]["name"]}</h3>
-                    <p>{selectedHero[0]["description"]}</p>
-                    <img src={selectedHero[0]["thumbnail"]} width={150} alt={selectedHero[0]["name"]} />
-                </div>)}
-            {selectedHero.length >= 2 &&
-                <div>
-                    {Object.values(selectedHero).map((hero, index) => {
-                        return (
-                            <div key={index}>
-                                <h3>{index + 1} - {hero["name"]}</h3>
-                                <p>{hero["description"]}</p>
-                                <img src={hero["thumbnail"]} width={150} alt={hero["name"]} />
-                            </div>
-                        )
-                    })}
-                </div>}
+            <CenteredHeroes>
+                <h1>Total Selected: {selectedHero.length}</h1>
+                {(selectedHero.length === 0 || selectedHero == null) &&
+                    <div>
+                        <h1>You haven`t selected any heroes yet 😕</h1>
+                    </div>}
+                {selectedHero.length >= 1 &&
+                    <div>
+                        {Object.values(selectedHero).map((hero, index) => {
+                            return (
+                                <div key={index}>
+                                    <h3>{index + 1} - {hero["name"]}</h3>
+                                    <img src={hero["thumbnail"]} width={150} alt={hero["name"]} />
+                                    <p>#{hero["id"]} - {hero["description"] === "" ? "No description available" : hero["description"]}</p>
+                                </div>
+                            )
+                        })}
+                    </div>}
+            </CenteredHeroes>
         </>
     )
 }
