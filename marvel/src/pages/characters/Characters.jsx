@@ -7,6 +7,7 @@ export default function Characters() {
     const { selectedHero, setSelectedHero } = useSelected(SelectedContext);
 
     const [heroes, setHeroes] = useState([])
+
     const [modal, setModal] = useState({
         showModal: false,
         title: "",
@@ -28,9 +29,15 @@ export default function Characters() {
         fetchData();
     }, [])
 
+
     function handleAdd(hero) {
-        if (selectedHero.length === 5) {
-            alert("Can`t add anymore heroes!")
+        if (selectedHero.length >= 4 && selectedHero.length < 5) {
+            setModal({
+                showModal: !modal.showModal,
+                title: `${hero["name"]} was the last one 😉`,
+                message: `Now your league is complete! (5/5) You will not be able to choose anymore heroes⚠️`
+            })
+            selectedHero.push(hero)
         }
         else {
             if (!selectedHero.includes(hero)) {
@@ -108,9 +115,8 @@ export default function Characters() {
                                 <h3>{modal.message}</h3>
                                 {(selectedHero.length === 0) &&
                                     <p>Your heroes selection is EMPTY.</p>}
-                                {(selectedHero.length < 5 && selectedHero.length > 0) &&
+                                {(selectedHero.length < 5) &&
                                     <p>Total Heroes Selected: {selectedHero.length} (máx: 5)</p>}
-                                {(selectedHero.length >= 5) && <p>Your league is complete! (5/5) You will not be able to choose anymore heroes⚠️</p>}
                             </ModalBody>
                             <ModalFooter>
                                 <ModalButton onClick={() => setModal({

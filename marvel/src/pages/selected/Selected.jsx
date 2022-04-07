@@ -10,7 +10,7 @@ export default function Selected() {
             <h1>Total Selected: {selectedHero.length}</h1>
             {(selectedHero.length === 0 || selectedHero == null) &&
                 <div>
-                    <h1>You haven`t added any heroes :( </h1>
+                    <h1>You haven`t selected any heroes yet 😕</h1>
                 </div>}
             {(selectedHero.length == 1 && selectedHero.length < 2) &&
                 (<div>

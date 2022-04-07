@@ -12,8 +12,9 @@ apikey = "e423b333a7aba87d5f832698af6bc1eb"
 hashkey = "9f97209a76d8959d9497419381a93284"
 base = "https://gateway.marvel.com:443"
 req = "/v1/public/characters?"
+offset = "300"
 
-URL = base + req + "limit=" + limit + "&ts=" + ts + "&apikey=" + apikey + "&hash=" + hashkey
+URL = base + req + "limit=" + limit + "&ts=" + ts + "&apikey=" + apikey + "&hash=" + hashkey + "&offset=" + offset
 
 app = Flask(__name__)
 
