@@ -6,7 +6,6 @@ const FooterOne = styled.div`
   width: 100%;
   background-color: #050000;
   border: 3px solid black;
-  border-radius: 8px;
   align-items: center;
   justify-content: center;
   display: flex;

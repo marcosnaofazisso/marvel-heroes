@@ -7,7 +7,6 @@ const HeaderOne = styled.header`
   font-family: Arial, Helvetica, sans-serif;
   width: 100%;
   background-color: #070000;
-  border-radius: 8px;
   text-align: center;
   img {
     margin-top: 2rem;
@@ -17,12 +16,12 @@ const HeaderOne = styled.header`
 `;
 
 export default function Header() {
-    return (
-        <>
-            <HeaderOne>
-                <img src={logo} alt="Logo Marvel" />
-                <Menu />
-            </HeaderOne>
-        </>
-    )
+  return (
+    <>
+      <HeaderOne>
+        <img src={logo} alt="Logo Marvel" />
+        <Menu />
+      </HeaderOne>
+    </>
+  )
 }

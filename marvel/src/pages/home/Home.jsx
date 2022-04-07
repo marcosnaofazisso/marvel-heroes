@@ -15,33 +15,18 @@ export const HomeOne = styled.div`
         font-size: 70px;
         color: #FFF;
     }
+    .homeHeight {
+        height: 30rem;
+    }
 `;
 
 
 export default function Home() {
     return (
-        <>
-            <HomeOne>
-                <div>
-                    <h1>Desafio Marvel</h1>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                </div>
-            </HomeOne>
-        </>
+        <HomeOne>
+            <div className="homeHeight">
+                <h1>Desafio Marvel</h1>
+            </div>
+        </HomeOne>
     )
 }

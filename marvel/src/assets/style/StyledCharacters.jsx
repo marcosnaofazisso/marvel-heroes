@@ -7,4 +7,7 @@ export const CenteredHeroes = styled.div`
     margin-right: auto;
     width: 25rem;
   }
+  .selectedHeight {
+    min-height: 10rem;
+  }
 `;
