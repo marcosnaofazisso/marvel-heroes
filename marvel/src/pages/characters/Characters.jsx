@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { SelectedContext, useSelected } from '../../components/context/SelectedContextProvider'
 import { ModalDiv, ModalHeader, ModalFooter, ModalBody, ModalContent, ModalButton } from '../../assets/style/StyledModal';
+import ReactPaginate from 'react-paginate'
 
 export default function Characters() {
 
     const { selectedHero, setSelectedHero } = useSelected(SelectedContext);
 
-    const [heroes, setHeroes] = useState([])
+    const [heroes, setHeroes] = useState([]);
+    const [pageCount, setPageCount] = useState(0)
 
     const [modal, setModal] = useState({
         showModal: false,
@@ -14,20 +16,35 @@ export default function Characters() {
         message: ""
     })
 
+
     useEffect(() => {
-        async function fetchData() {
+        const getHeroes = async () => {
             try {
-                const response = await fetch("/rest");
-                const results = await response.json();
-                setHeroes(results);
-                console.log(results);
-            }
-            catch (e) {
-                console.error(e);
+                const response = await fetch("/rest0");
+                const data = await response.json()
+                setPageCount(Math.ceil(1560 / 100));
+                console.log(pageCount)
+                setHeroes(data);
+            } catch (e) {
+                console.error(e)
             }
         }
-        fetchData();
+        getHeroes();
+
     }, [])
+
+    const fetchHeroes = async (currentPage) => {
+        const response = await fetch(`/rest${currentPage}`);
+        const data = await response.json()
+        return data;
+    }
+
+    async function handlePageClick(data) {
+        let currentPage = data.selected
+        const heroesFromServer = await fetchHeroes(currentPage);
+        setHeroes(heroesFromServer)
+
+    }
 
 
     function handleAdd(hero) {
@@ -88,6 +105,23 @@ export default function Characters() {
     return (
         <>
             <div>
+                <ReactPaginate
+                    previousLabel={'previous'}
+                    nextLabel={'next'}
+                    pageCount={pageCount}
+                    onPageChange={handlePageClick}
+                    containerClassName={'pagination justify-content-center'}
+                    pageClassName={'page-item'}
+                    previousClassName={'page-item'}
+                    nextClassName={'page-item'}
+                    breakClassName={'page-item'}
+                    pageLinkClassName={'page-link'}
+                    previousLinkClassName={'page-link'}
+                    nextLinkClassName={'page-link'}
+                    breakLinkClassName={'page-link'}
+                    activeClassName={'active'}
+
+                />
                 <div>
                     {Object.values(heroes).map((hero, index) => {
                         return (
@@ -105,6 +139,23 @@ export default function Characters() {
                         )
                     })}
                 </div>
+                <ReactPaginate
+                    previousLabel={'previous'}
+                    nextLabel={'next'}
+                    pageCount={pageCount}
+                    onPageChange={handlePageClick}
+                    containerClassName={'pagination justify-content-center'}
+                    pageClassName={'page-item'}
+                    previousClassName={'page-item'}
+                    nextClassName={'page-item'}
+                    breakClassName={'page-item'}
+                    pageLinkClassName={'page-link'}
+                    previousLinkClassName={'page-link'}
+                    nextLinkClassName={'page-link'}
+                    breakLinkClassName={'page-link'}
+                    activeClassName={'active'}
+
+                />
                 {modal.showModal &&
                     <ModalDiv>
                         <ModalContent>
