@@ -3,18 +3,23 @@ try:
     from flask import Flask, jsonify, request
     from flask import request
     import json
+    from dotenv import load_dotenv
+    from pathlib import Path
+    env_path = Path('../.env')
+    load_dotenv(dotenv_path=env_path)
+    import os
 except ImportError as ie:
     print("Error importing required packages:" + str(ie))
 
-base = "https://gateway.marvel.com:443"
-req = "/v1/public/characters?"
-apikey = "e423b333a7aba87d5f832698af6bc1eb"
-hashkey = "9f97209a76d8959d9497419381a93284"
-limit = "100"
-ts = "1649095132"
 
 app = Flask(__name__)
 
+base = "https://gateway.marvel.com:443"
+req = "/v1/public/characters?"
+apikey = os.getenv("API_KEY")
+hashkey = os.getenv("HASH_KEY")
+limit = os.getenv("LIMIT")
+ts = os.getenv("TIMESTAMP")
 
 @app.route("/rest0", methods=["GET"])
 def index():
