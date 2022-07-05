@@ -25,7 +25,7 @@ export default function Home() {
     return (
         <HomeOne>
             <div className="homeHeight">
-                <h1>Desafio Marvel</h1>
+                <h1>Personagens Marvel</h1>
             </div>
         </HomeOne>
     )
