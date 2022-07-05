@@ -26,7 +26,7 @@ export default function Characters() {
     useEffect(() => {
         const getHeroes = async () => {
             try {
-                const response = await fetch("/rest0");
+                const response = await fetch("https://marvel-requests.herokuapp.com/rest0");
                 const data = await response.json()
                 setPageCount(Math.ceil(1560 / 100));
                 setHeroes(data);
@@ -39,7 +39,7 @@ export default function Characters() {
     }, [])
 
     const fetchHeroes = async (currentPage) => {
-        const response = await fetch(`/rest${currentPage}`);
+        const response = await fetch(`https://marvel-requests.herokuapp.com/rest${currentPage}`);
         const data = await response.json()
         return data;
     }
@@ -109,81 +109,82 @@ export default function Characters() {
     }
 
     return (
-            <CenteredHeroes>
+        <CenteredHeroes>
+            <div>
+                <ReactPaginate
+                    previousLabel={'previous'}
+                    nextLabel={'next'}
+                    pageCount={pageCount}
+                    onPageChange={handlePageClick}
+                    containerClassName={'pagination justify-content-center'}
+                    pageClassName={'page-item'}
+                    previousClassName={'page-item'}
+                    nextClassName={'page-item'}
+                    breakClassName={'page-item'}
+                    pageLinkClassName={'page-link'}
+                    previousLinkClassName={'page-link'}
+                    nextLinkClassName={'page-link'}
+                    breakLinkClassName={'page-link'}
+                    activeClassName={'active'}
+
+                />
                 <div>
-                    <ReactPaginate
-                        previousLabel={'previous'}
-                        nextLabel={'next'}
-                        pageCount={pageCount}
-                        onPageChange={handlePageClick}
-                        containerClassName={'pagination justify-content-center'}
-                        pageClassName={'page-item'}
-                        previousClassName={'page-item'}
-                        nextClassName={'page-item'}
-                        breakClassName={'page-item'}
-                        pageLinkClassName={'page-link'}
-                        previousLinkClassName={'page-link'}
-                        nextLinkClassName={'page-link'}
-                        breakLinkClassName={'page-link'}
-                        activeClassName={'active'}
-
-                    />
-                    <div>
-                        {Object.values(heroes).map((hero, index) => {
-                            return (
-                                <div key={index}>
-                                    <h3>{actualPage === 1 ? index + 1 : ((actualPage - 1) * 100) + index + 1} - {hero["name"]}</h3>
-                                    <img src={hero["thumbnail"]} width={150} alt={hero["name"]} />
-                                    <p>#{hero["id"]} - {hero["description"] === "" ? "No description available" : hero["description"]}</p>
-                                    <div>
-                                        {handleCountHeroes(hero, "add") && selectedHero.length < 5 &&
-                                            <button onClick={() => handleAdd(hero)}>Add</button>}
-                                        {handleCountHeroes(hero, "remove") && selectedHero.length > 0 &&
-                                            <button onClick={() => handleRemove(hero)}>Remove</button>}
-                                    </div>
+                    {Object.values(heroes).length < 1 && (<h1>Carregando...</h1>)}
+                    {Object.values(heroes).map((hero, index) => {
+                        return (
+                            <div key={index}>
+                                <h3>{actualPage === 1 ? index + 1 : ((actualPage - 1) * 100) + index + 1} - {hero["name"]}</h3>
+                                <img src={hero["thumbnail"]} width={150} alt={hero["name"]} />
+                                <p>#{hero["id"]} - {hero["description"] === "" ? "No description available" : hero["description"]}</p>
+                                <div>
+                                    {handleCountHeroes(hero, "add") && selectedHero.length < 5 &&
+                                        <button onClick={() => handleAdd(hero)}>Add</button>}
+                                    {handleCountHeroes(hero, "remove") && selectedHero.length > 0 &&
+                                        <button onClick={() => handleRemove(hero)}>Remove</button>}
                                 </div>
-                            )
-                        })}
-                    </div>
-                    <ReactPaginate
-                        previousLabel={'previous'}
-                        nextLabel={'next'}
-                        pageCount={pageCount}
-                        onPageChange={handlePageClick}
-                        containerClassName={'pagination justify-content-center'}
-                        pageClassName={'page-item'}
-                        previousClassName={'page-item'}
-                        nextClassName={'page-item'}
-                        breakClassName={'page-item'}
-                        pageLinkClassName={'page-link'}
-                        previousLinkClassName={'page-link'}
-                        nextLinkClassName={'page-link'}
-                        breakLinkClassName={'page-link'}
-                        activeClassName={'active'}
-
-                    />
-                    {modal.showModal &&
-                        <ModalDiv>
-                            <ModalContent>
-                                <ModalHeader>
-                                    <h1>{modal.title}</h1>
-                                </ModalHeader>
-                                <ModalBody>
-                                    <h3>{modal.message}</h3>
-                                    {(selectedHero.length === 0) &&
-                                        <p>Your heroes selection is EMPTY.</p>}
-                                    {(selectedHero.length < 5) &&
-                                        <p>Total Heroes Selected: {selectedHero.length} (máx: 5)</p>}
-                                </ModalBody>
-                                <ModalFooter>
-                                    <ModalButton onClick={() => setModal({
-                                        showModal: false,
-                                        message: ""
-                                    })}>Ok</ModalButton>
-                                </ModalFooter>
-                            </ModalContent>
-                        </ModalDiv>}
+                            </div>
+                        )
+                    })}
                 </div>
-            </CenteredHeroes>
+                <ReactPaginate
+                    previousLabel={'previous'}
+                    nextLabel={'next'}
+                    pageCount={pageCount}
+                    onPageChange={handlePageClick}
+                    containerClassName={'pagination justify-content-center'}
+                    pageClassName={'page-item'}
+                    previousClassName={'page-item'}
+                    nextClassName={'page-item'}
+                    breakClassName={'page-item'}
+                    pageLinkClassName={'page-link'}
+                    previousLinkClassName={'page-link'}
+                    nextLinkClassName={'page-link'}
+                    breakLinkClassName={'page-link'}
+                    activeClassName={'active'}
+
+                />
+                {modal.showModal &&
+                    <ModalDiv>
+                        <ModalContent>
+                            <ModalHeader>
+                                <h1>{modal.title}</h1>
+                            </ModalHeader>
+                            <ModalBody>
+                                <h3>{modal.message}</h3>
+                                {(selectedHero.length === 0) &&
+                                    <p>Your heroes selection is EMPTY.</p>}
+                                {(selectedHero.length < 5) &&
+                                    <p>Total Heroes Selected: {selectedHero.length} (máx: 5)</p>}
+                            </ModalBody>
+                            <ModalFooter>
+                                <ModalButton onClick={() => setModal({
+                                    showModal: false,
+                                    message: ""
+                                })}>Ok</ModalButton>
+                            </ModalFooter>
+                        </ModalContent>
+                    </ModalDiv>}
+            </div>
+        </CenteredHeroes>
     )
 }
