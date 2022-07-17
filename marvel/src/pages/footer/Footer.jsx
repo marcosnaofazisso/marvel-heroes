@@ -14,6 +14,14 @@ const FooterOne = styled.div`
       font-size: 1.25rem;
       font-weight: 400;
   }
+
+  @media(max-width: 800px) {
+    text-align: center;
+    p {
+      font-size: .8rem;
+      font-weight: 400;
+  }
+    }
 `;
 
 function Footer() {

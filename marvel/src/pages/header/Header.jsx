@@ -13,6 +13,14 @@ const HeaderOne = styled.header`
     height: 10rem;
     width: 20rem;
   }
+  @media(max-width: 800px) {
+    img {
+      margin-top: 1rem;
+      height: 5rem;
+      width: 10rem;
+    }
+
+  }
 `;
 
 export default function Header() {

@@ -5,9 +5,6 @@ import ReactPaginate from 'react-paginate'
 import { CenteredHeroes } from '../../assets/style/StyledCharacters';
 
 
-
-
-
 export default function Characters() {
 
     const { selectedHero, setSelectedHero } = useSelected(SelectedContext);
@@ -128,15 +125,15 @@ export default function Characters() {
                     activeClassName={'active'}
 
                 />
-                <div>
-                    {Object.values(heroes).length < 1 && (<h1>Carregando...</h1>)}
+                <div className='heroeCard'>
+                    {Object.values(heroes).length < 1 && (<div className='charactersHeight'><h1>Loading...</h1></div>)}
                     {Object.values(heroes).map((hero, index) => {
                         return (
                             <div key={index}>
                                 <h3>{actualPage === 1 ? index + 1 : ((actualPage - 1) * 100) + index + 1} - {hero["name"]}</h3>
                                 <img src={hero["thumbnail"]} width={150} alt={hero["name"]} />
                                 <p>#{hero["id"]} - {hero["description"] === "" ? "No description available" : hero["description"]}</p>
-                                <div>
+                                <div className='heroeCardButton'>
                                     {handleCountHeroes(hero, "add") && selectedHero.length < 5 &&
                                         <button onClick={() => handleAdd(hero)}>Add</button>}
                                     {handleCountHeroes(hero, "remove") && selectedHero.length > 0 &&

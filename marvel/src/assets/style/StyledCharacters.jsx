@@ -8,6 +8,24 @@ export const CenteredHeroes = styled.div`
     width: 25rem;
   }
   .selectedHeight {
-    min-height: 10rem;
+    height: 20rem;
   }
+  .charactersHeight {
+    height: 20rem;
+  }
+  @media(max-width:800px) {
+    width: 90%;
+    p {
+      font-size: 12px;
+      width: 85%;
+  }
+  .heroeCardButton {
+    margin-bottom: 2rem;
+  }
+
+  }
+  .heroeCard {
+    width: 100%;
+  }
+
 `;

@@ -22,14 +22,14 @@ const MenuOne = styled.nav`
     margin: 0 1rem;
     line-height: 2rem;
   }
-
+  
   a {
     color: white;
     font-size: 1.5rem;
     text-decoration: none;
     text-transform: uppercase;
   }
-
+  
   a:hover,
   a:active,
   a.active {
@@ -37,7 +37,14 @@ const MenuOne = styled.nav`
     padding-bottom: 0.25rem;
     border-bottom: 4px solid #ff0808;
   }
-`;
+  
+  @media(max-width: 800px) {
+    margin-top: 2rem;
+    a {
+      font-size: 1rem;
+    }
+  }
+  `;
 
 export default function Menu() {
 

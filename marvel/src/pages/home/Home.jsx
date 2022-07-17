@@ -18,6 +18,16 @@ export const HomeOne = styled.div`
     .homeHeight {
         height: 30rem;
     }
+
+    @media(max-width: 800px) {
+        h1 {
+        font-size: 50px;
+    }
+    .homeHeight {
+        height: 20rem;
+    }
+  }
+
 `;
 
 
