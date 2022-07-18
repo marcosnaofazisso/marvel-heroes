@@ -30,7 +30,6 @@ export const HomeOne = styled.div`
 
 `;
 
-
 export default function Home() {
     return (
         <HomeOne>

@@ -49,7 +49,6 @@ export default function Characters() {
 
     }
 
-
     function handleAdd(hero) {
         if (selectedHero.length >= 4 && selectedHero.length < 5) {
             setModal({
