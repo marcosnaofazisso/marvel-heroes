@@ -3,7 +3,7 @@ import { SelectedContext, useSelected } from '../../components/context/SelectedC
 import { ModalDiv, ModalHeader, ModalFooter, ModalBody, ModalContent, ModalButton } from '../../assets/style/StyledModal';
 import ReactPaginate from 'react-paginate'
 import { CenteredHeroes } from '../../assets/style/StyledCharacters';
-
+import api from '../../api';
 
 export default function Characters() {
 
@@ -23,8 +23,8 @@ export default function Characters() {
     useEffect(() => {
         const getHeroes = async () => {
             try {
-                const response = await fetch("https://marvel-requests.herokuapp.com/rest0");
-                const data = await response.json()
+                const response = await api.get("/rest0");
+                const data = await response.data
                 setPageCount(Math.ceil(1560 / 100));
                 setHeroes(data);
             } catch (e) {
@@ -36,8 +36,8 @@ export default function Characters() {
     }, [])
 
     const fetchHeroes = async (currentPage) => {
-        const response = await fetch(`https://marvel-requests.herokuapp.com/rest${currentPage}`);
-        const data = await response.json()
+        const response = await api.get(`/rest${currentPage}`);
+        const data = await response.data
         return data;
     }
 
