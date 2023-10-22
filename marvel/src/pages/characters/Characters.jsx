@@ -37,7 +37,7 @@ export default function Characters() {
 
     const fetchHeroes = async (currentPage) => {
         const response = await api.get(`/rest${currentPage}`);
-        const data = await response.data
+        const data = response.data
         return data;
     }
 
